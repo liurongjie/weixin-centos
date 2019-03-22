@@ -1,0 +1,2 @@
+  adding cronjob: (501a9fff39854e7afeaa1a374487f6f5) -> ('02 00 * * *', 'dajia.cron.checkstatus0', '>>F:\\Pycharm\\weixin\\logs\\cron1.log')
+  adding cronjob: (0786840618c31dd48d6f7dec380d9bfb) -> ('02 02 * * *', 'dajia.cron.checkstatus1', '>>F:\\Pycharm\\weixin\\logs\\cron2.log')
