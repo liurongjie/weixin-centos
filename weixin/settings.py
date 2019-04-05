@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dajia.apps.DajiaConfig',
     'django_crontab',
+    'xadmin',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -107,7 +109,7 @@ WSGI_APPLICATION = 'weixin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'weixin',  # MySQL中数据库名字，你需要现在mysql里创建一个数据库
+        'NAME': 'xadmin',  # MySQL中数据库名字，你需要现在mysql里创建一个数据库
         'USER': 'root',
         'PASSWORD': '123456',  # MySQL的密码??
         'HOST': '127.0.0.1',  # 默认本地?
@@ -138,17 +140,17 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
 
 
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
