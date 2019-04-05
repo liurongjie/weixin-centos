@@ -14,8 +14,9 @@ class User(models.Model):
     nickname = models.CharField(max_length=30, verbose_name="昵称")
     picture = models.CharField( max_length=50,verbose_name="微信头像")
     CHOICEgender = (
-        (0, "男"),
-        (1, "女"),
+        (0, "未知"),
+        (1, "男"),
+        (2,"女"),
     )
     gender=models.IntegerField(choices=CHOICEgender,verbose_name="性别")
     CHOICE = (
@@ -23,6 +24,7 @@ class User(models.Model):
         (1, "实名认证通过"),
     )
     status = models.IntegerField(choices=CHOICE, verbose_name="是否完成实名认证")
+    name=models.CharField(null=True, blank=True,max_length=15,verbose_name="姓名")
     number=models.CharField(null=True, blank=True,max_length=15,verbose_name="学号")
     telephone=models.CharField(null=True, blank=True,max_length=11,verbose_name="联系方式")
     department=models.CharField(null=True, blank=True,max_length=20,verbose_name="学院")
