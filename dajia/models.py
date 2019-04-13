@@ -12,7 +12,7 @@ class Team(models.Model):
 class User(models.Model):
     openid=models.CharField(max_length=100,primary_key=True,verbose_name="唯一身份标识openid")
     nickname = models.CharField(max_length=30, verbose_name="昵称")
-    picture = models.CharField( max_length=50,verbose_name="微信头像")
+    picture = models.CharField( max_length=150,verbose_name="微信头像")
     CHOICEgender = (
         (0, "未知"),
         (1, "男"),
@@ -61,7 +61,7 @@ class  Production(models.Model):
     team=models.ForeignKey(Team,models.CASCADE,related_name="production")
     merchant=models.ForeignKey(Merchant,on_delete=models.CASCADE,related_name="production")
     name=models.CharField(max_length=20,verbose_name="产品名称")
-    reputation=models.IntegerField(verbose_name="产品评分")
+    reputation=models.FloatField(verbose_name="好评率")
     CHOICE = (
         (1, "健身"),
         (2, "驾校"),
@@ -73,6 +73,7 @@ class  Production(models.Model):
     type = models.IntegerField(choices=CHOICE, verbose_name="产品类别")
     cutnumber = models.IntegerField(default=0,verbose_name="砍价人次")
     saveprice = models.FloatField(default=0,verbose_name="累计节省")
+    distance=models.FloatField(verbose_name="距离")
     class Meta:
         verbose_name="产品"
         verbose_name_plural = verbose_name
@@ -102,6 +103,7 @@ class Period(models.Model):
     number = models.IntegerField(default=0,verbose_name="参团人数")
     cutnumber = models.IntegerField(default=0,verbose_name="砍价人次")
     saveprice = models.FloatField(default=0,verbose_name="累计节省")
+    logo = models.ImageField(upload_to="logo", verbose_name="期表商品logo")
     class Meta:
         verbose_name="期表"
         verbose_name_plural = verbose_name
@@ -119,7 +121,7 @@ class Steam(models.Model):
         verbose_name_plural = verbose_name
 
 class Comment(models.Model):
-    commentid=models.CharField(max_length=50,primary_key=True,verbose_name="评论id")
+    commentid=models.CharField(max_length=150,primary_key=True,verbose_name="评论id")
     production=models.ForeignKey(Production,on_delete=models.CASCADE,related_name="comment")
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="comment")
     context=models.CharField(max_length=200,verbose_name="评论")
@@ -171,7 +173,7 @@ class Order(models.Model):
         verbose_name_plural = verbose_name
 
 class Cutting(models.Model):
-    cutid=models.CharField(primary_key=True,max_length=50,verbose_name="砍价编号")
+    cutid=models.CharField(primary_key=True,max_length=150,verbose_name="砍价编号")
     audience = models.ForeignKey(User, on_delete=models.CASCADE,related_name="cutting")
     steam=models.ForeignKey(Steam,on_delete=models.CASCADE,related_name="cutting")
     cutprice=models.FloatField(verbose_name="砍价")
@@ -181,8 +183,12 @@ class Cutting(models.Model):
         verbose_name_plural = verbose_name
 
 
-
-
+class Need(models.Model):
+    needid=models.BigAutoField(primary_key=True)#自增组件字段
+    user=models.ForeignKey(User, on_delete=models.CASCADE,related_name="need")
+    teamname=models.CharField(max_length=50,verbose_name="团队名称")
+    pic=models.ImageField(upload_to="need", verbose_name="需求图片")
+    time = models.DateTimeField( verbose_name="需求提交时间")
 
 
 

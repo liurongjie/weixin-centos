@@ -111,7 +111,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'xadmin',  # MySQL中数据库名字，你需要现在mysql里创建一个数据库
         'USER': 'root',
-        'PASSWORD': '123456',  # MySQL的密码??
+        'PASSWORD': 'Lrj13397220636',  # MySQL的密码??
         'HOST': '127.0.0.1',  # 默认本地?
         'PORT': '3306'  # 默认3306端口?
     }
