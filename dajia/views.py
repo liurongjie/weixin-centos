@@ -377,7 +377,7 @@ def need(request):
         userid=request.POST.get('userid',"")
         user=User.objects.get(userid=userid)
         nowtime = timezone.now()
-        teamname=User.team.teamname
+        teamname=user.team.teamname
         Need.objects.create(user=user,time=nowtime,teamname=teamname)
         return JsonResponse({'success': True})
 

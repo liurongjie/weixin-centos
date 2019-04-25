@@ -7,6 +7,7 @@ def checkstatus1():
     #现在时间
     nowtime = timezone.now()
     periods = Period.objects.filter(status=2,starttime__lte=nowtime).all()
+    print(1)
     for period in periods:
         period.status=1
         period.save()
@@ -18,7 +19,9 @@ def checkstatus1():
 def checkstatus0():
     nowtime = timezone.now()
     periods = Period.objects.filter(status=1,endtime__lte=nowtime).all()
+    print(2)
     for period in periods:
+        print("有订单变为结束")
         period.status=0
         period.production.cutnumber+=period.cutnumber
         period.production.saveprie+=period.saveprie
