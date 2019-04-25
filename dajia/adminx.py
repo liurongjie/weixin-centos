@@ -1,6 +1,7 @@
 import xadmin
 from xadmin import views
-from .models import Team,User,Merchant,Production,Period,Steam,Comment,Order,Cutting
+from .models import Team,User,Merchant,Production,Period,Steam,Comment,Order,Cutting,Need,Suggestion,Membership
+from .models import Gift,Giftorder,Sign
 # 创建xadmin的最基本管理器配置，并与view绑定
 class BaseSetting(object):
     # 开启主题功能
@@ -25,9 +26,9 @@ class Teamxadmin(object):
 xadmin.site.register(Team,Teamxadmin)
 
 class Userxadmin(object):
-    list_display = {'openid', 'nickname', 'picture','gender', 'status','number','telephone','department','team'}
+    list_display = {'userid','openid', 'nickname', 'picture','gender', 'status','number','telephone','department','team','name','account'}
     search_fields = {'team__teamname','nickname'}
-    list_filter = {'gender','status'}
+    list_filter = {'gender','status','team__teamname'}
 xadmin.site.register(User,Userxadmin)
 
 class Merchantxadmin(object):
@@ -37,7 +38,7 @@ class Merchantxadmin(object):
 xadmin.site.register(Merchant,Merchantxadmin)
 
 class Productionxadmin(object):
-    list_display = {'productionid','team','merchant','name','reputation','introduction','introductionpic','type','cutnumber','saveprice'}
+    list_display = {'productionid','team','merchant','name','reputation','introduction','introductionpic','type','cutnumber','saveprice','logo'}
     search_fields = {'team__name','merchant__name'}
     list_filter = {'type'}
 xadmin.site.register(Production,Productionxadmin)
@@ -51,14 +52,19 @@ xadmin.site.register(Period,Periodxadmin)
 
 
 class Steamxadmin(object):
-    list_display = {'steamid','time','cutprice','steamnumber','master'}
-    search_fields = {'steamid','master__name'}
+    list_display = {'steamid','time','cutprice','steamnumber','member'}
+    search_fields = {'steamid'}
     list_filter = {'cutprice'}
 xadmin.site.register(Steam,Steamxadmin)
 
+class Memberxadmin(object):
+    list_display = {'id','user','steam','cutprice','time'}
+    search_fields = {'user__name'}
+
+xadmin.site.register(Membership,Memberxadmin)
 
 class Commentxadmin(object):
-    list_display = {'commentid','production','user','context','time','status','judge'}
+    list_display = {'commentid','production','user','context','time','pic1','pic2','pic3','status','judge'}
     search_fields = {'production__name','user__name'}
     list_filter = {'status','judge'}
 xadmin.site.register(Comment,Commentxadmin)
@@ -75,4 +81,35 @@ class Cuttingxadmin(object):
     search_fields = {'steam__steamid','steam__master__name'}
     list_filter = {'cutprice'}
 xadmin.site.register(Cutting,Cuttingxadmin)
+
+class Needxadmin(object):
+    list_display = {'needid','user','teamname','pic','time'}
+    search_fields = {'teamname'}
+    list_filter = {}
+xadmin.site.register(Need,Needxadmin)
+
+class Suggestionxadmin(object):
+    list_display = {'id','user','teamname','pic','time'}
+    search_fields = {'teamname'}
+    list_filter = {}
+xadmin.site.register(Suggestion,Suggestionxadmin)
+
+class Giftxadmin(object):
+    list_display = {'id','name','worth','pic','time'}
+    search_fields = {}
+    list_filter = {}
+xadmin.site.register(Gift,Giftxadmin)
+
+class Giftorderxadmin(object):
+    list_display = {'id','user','gift','status','time'}
+    search_fields = {}
+    list_filter = {"user__name","status","gift__name"}
+xadmin.site.register(Giftorder,Giftorderxadmin)
+
+class Signxadmin(object):
+    list_display = {'id','userid','gain','time'}
+    search_fields = {}
+    list_filter = {'userid','time','gain'}
+xadmin.site.register(Sign,Signxadmin)
+
 

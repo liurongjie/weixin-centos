@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dajia.apps.DajiaConfig',
     'django_crontab',
+
     'xadmin',
     'crispy_forms',
 ]
@@ -47,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -161,6 +162,6 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 #每天00：02分开始核查，将已经结束的期表状态改为0，结束
 #每天02：02分开始核查，将未进行的期表改为正在进行1，
 CRONJOBS=[
-    ('02 00 * * *','dajia.cron.checkstatus0','>>'+os.path.join(BASE_DIR,'logs/cron1.log')),
+    ('*/1 * * * *','dajia.cron.checkstatus0','>>'+os.path.join(BASE_DIR,'logs/cron1.log')),
     ('02 02 * * *','dajia.cron.checkstatus1','>>'+os.path.join(BASE_DIR,'logs/cron2.log'))
 ]
